@@ -104,6 +104,10 @@ export default function App() {
     fetchUsers();
   };
 
+  function test_print() {
+    console.log("test code")
+  }
+
   /* Since I'm using React, I decided to move basically everything from
   index.html into here since it was easier to use state variables here 
   being my first time using React.
