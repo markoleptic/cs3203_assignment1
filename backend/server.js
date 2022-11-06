@@ -4,8 +4,6 @@ var bodyParser = require("body-parser");
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 var fs = require("fs");
-const { json } = require('express');
-const { parse } = require('path');
 
 // variable for tweet data from favs.json
 var tweetInfo = [];
@@ -20,6 +18,7 @@ fs.readFile("favs.json", "utf8", function readFileCallback(err, data) {
   } else {
     try {
       tweetInfo = JSON.parse(data);
+      console.log("Successfully read favs.json");
     } catch (err) {
       console.log("Error parsing JSON string:", err);
     }
@@ -84,10 +83,7 @@ app.post("/searchinfo", function (req, res) {
   var IDToSearch = parseInt(req.body.searchID);
   var foundTweets = [];
   for (var i = 0; i < tweetInfo.length; i++) {
-    console.log(tweetInfo[i].id);
-    console.log(IDToSearch);
     if (tweetInfo[i].id === IDToSearch) {
-      console.log("match");
       searchedTweets.push({
         created_at: tweetInfo[i].created_at,
         text: tweetInfo[i].text,
@@ -140,6 +136,6 @@ app.delete("/tweetinfo/:tweetid", function (req, res) {
   }
 });
 
-app.listen(3000, function () {
-  console.log("Server listening on " + 3000);
+app.listen(5000, function () {
+  console.log("Server listening on " + 5000);
 });
